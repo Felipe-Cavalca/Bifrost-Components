@@ -7,7 +7,7 @@ class customComponents {
     constructor(prefix = "c-", pathComponents = "/components/") {
         this.#prefix = this.#getData("prefix") ?? prefix;
         this.#pathComponents = this.#getData("path") ?? pathComponents;
-        let elements = this.#getElementsWithPrefix(this.#prefix);
+        const elements = this.#getElementsWithPrefix(this.#prefix);
         this.#loadElements(elements);
     }
 
@@ -17,25 +17,28 @@ class customComponents {
 
     #loadElements(elements) {
         elements.forEach(element => {
-            let htmlUrl = this.#pathComponents + element + ".html";
-            htmlUrl = htmlUrl.replaceAll(this.#prefix, "");
+            const htmlUrl = (this.#pathComponents + element + ".html").replaceAll(this.#prefix, "");
             this.#request(htmlUrl).then(htmlComponent => {
                 this.#defineCustomElement(element, htmlComponent);
-            })
+            });
         });
     }
 
     #getElementsWithPrefix(prefix) {
-        const allElements = Array.from(document.getElementsByTagName('*'));
-        const elementsWithPrefix = allElements.filter(element => element.tagName.toLowerCase().startsWith(prefix));
-        const tagName = elementsWithPrefix.map(element => element.tagName.toLowerCase());
-        const uniqueTags = [...new Set(tagName)];
-        return uniqueTags;
+        const uniqueTags = new Set();
+        const allElements = document.getElementsByTagName('*');
+        for (let i = 0; i < allElements.length; i++) {
+            const tagName = allElements[i].tagName.toLowerCase();
+            if (tagName.startsWith(prefix)) {
+                uniqueTags.add(tagName);
+            }
+        }
+        return Array.from(uniqueTags);
     }
 
     async #request(url) {
-        let response = await fetch(url);
-        return await response.text();
+        const response = await fetch(url);
+        return response.text();
     }
 
     #defineCustomElement(nameElement, htmlComponent) {
@@ -52,14 +55,13 @@ class customComponents {
 
             #prepareScripts() {
                 const scripts = this.shadowRoot.querySelectorAll('script');
-                if(scripts.length < 1) return;
+                if (scripts.length < 1) return;
                 scripts.forEach(script => {
                     const newScript = document.createElement('script');
                     newScript.textContent = script.textContent;
-                    newScript.type = script.type || 'text/javascript';
+                    if (script.type) newScript.type = script.type;
                     this.shadowRoot.appendChild(newScript);
                 });
-                // Executa a função do script no contexto do componente
                 if (typeof initializeComponentScript === 'function') {
                     initializeComponentScript(this);
                 }
