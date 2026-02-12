@@ -73,6 +73,20 @@ jobs:
 
             return newTag;
 
+      - name: Disparar workflows de publicação
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const newTag = '${{ steps.create_tag.outputs.new_tag }}';
+            await github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event_type: 'tag-created',
+              client_payload: {
+                tag: newTag,
+              },
+            });
+
   update_release_draft:
     needs: create_tag_and_draft_release
     runs-on: ubuntu-latest
@@ -217,14 +231,3 @@ jobs:
           git checkout -b latest-release || git checkout latest-release
           git reset --hard origin/main
           git push --force origin latest-release
-
-  sync_labels:
-    runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
-    steps:
-      - uses: actions/checkout@v4
-      - uses: micnncim/action-label-syncer@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          manifest: .github/labels.yml
-          prune: true
