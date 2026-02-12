@@ -1,8 +1,8 @@
-# BifrostPHP Components
+# Bifrost-Components
 
 [![Repo](https://img.shields.io/badge/Bifrost-Components-blue)](./)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
-[![Latest Release](https://img.shields.io/github/v/release/Felipe-Cavalca/BifrostPHP-Components)](https://github.com/Felipe-Cavalca/BifrostPHP-Components/releases/latest)
+[![Latest Release](https://img.shields.io/github/v/release/Felipe-Cavalca/Bifrost-Components)](https://github.com/Felipe-Cavalca/Bifrost-Components/releases/latest)
 
 > A lightweight and powerful solution for creating reusable HTML components with zero dependencies
 
@@ -29,7 +29,7 @@
 
 ### Option 1: Download from Releases
 
-1. Download the latest version of `customComponents.js` from [releases page](https://github.com/Felipe-Cavalca/BifrostPHP-Components/releases/latest)
+1. Download the latest version of `customComponents.js` from [releases page](https://github.com/Felipe-Cavalca/Bifrost-Components/releases/latest)
 2. Add the file to your project directory
 3. Include it in your HTML:
 
@@ -40,7 +40,7 @@
 ### Option 2: CDN (Coming Soon)
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/Felipe-Cavalca/BifrostPHP-Components@latest/customComponents.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Felipe-Cavalca/Bifrost-Components@latest/customComponents.js"></script>
 ```
 
 ## 🎯 Quick Start
@@ -276,7 +276,7 @@ Official stable releases are created manually after:
 - ✅ Documentation is updated
 - ✅ Breaking changes are documented
 
-[View all releases →](https://github.com/Felipe-Cavalca/BifrostPHP-Components/releases)
+[View all releases →](https://github.com/Felipe-Cavalca/Bifrost-Components/releases)
 
 ## 🤝 Contributing
 
