@@ -127,9 +127,9 @@ jobs:
       - name: Create package.json
         run: |
           echo '{
-            "name": "bifrost-php-components",
+            "name": "bifrost-components",
             "version": "1.0.0",
-            "description": "Bifrost PHP Components",
+            "description": "Bifrost-Components",
             "main": "index.js",
             "dependencies": {
               "terser": "^5.31.0"
